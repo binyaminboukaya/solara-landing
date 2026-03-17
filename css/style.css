@@ -242,6 +242,13 @@ canvas {
   align-items: center;
   min-height: 100vh;
   pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.scroll-section.is-active {
+  opacity: 1;
+  visibility: visible;
 }
 .scroll-section .section-inner,
 .scroll-section .cta-inner {

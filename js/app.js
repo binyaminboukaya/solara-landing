@@ -190,15 +190,13 @@ function initFrameScroll() {
 
 /* ─────────────────────────────────────── SECTION ANIMATIONS */
 function initSectionAnimations() {
-  const scrollH = scrollContainer.offsetHeight;
-
   document.querySelectorAll('.scroll-section').forEach((section) => {
     const enter  = parseFloat(section.dataset.enter)  / 100;
     const leave  = parseFloat(section.dataset.leave)  / 100;
     const persist = section.dataset.persist === 'true';
     const midPct  = (enter + leave) / 2;
 
-    section.style.top = (midPct * scrollH) + 'px';
+    section.style.top = (midPct * 100) + '%';
     section.style.transform = 'translateY(-50%)';
 
     const type = section.dataset.animation;
@@ -243,8 +241,10 @@ function initSectionAnimations() {
       onUpdate: (self) => {
         const p = self.progress;
         if (p >= enter && p <= leave) {
+          section.classList.add('is-active');
           if (tl.progress() < 1) tl.play();
         } else if (!persist) {
+          section.classList.remove('is-active');
           if (tl.progress() > 0) tl.reverse();
         }
       }
